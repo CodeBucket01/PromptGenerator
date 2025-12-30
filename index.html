@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuminaPrompt - AI Photo Editing Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span>LuminaPrompt</span>
+            </div>
+            <nav>
+                <button class="nav-btn active" data-target="analyzer">Photo to Prompt</button>
+                <button class="nav-btn" data-target="generator">Random Prompts</button>
+            </nav>
+        </header>
+        <main>
+            <!-- Photo to Prompt Section -->
+            <section id="analyzer" class="active-section">
+                <div class="hero-text">
+                    <h1>Turn Photos into Prompts</h1>
+                    <p>Upload a reference photo to generate a detailed AI prompt for editing or recreation.</p>
+                </div>
+                <div class="analyzer-container">
+                    <div class="upload-zone" id="drop-zone">
+                        <input type="file" id="file-input" accept="image/*" hidden>
+                        <div class="upload-content" id="upload-content">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                            <h3>Drop image here or click to upload</h3>
+                        </div>
+                        <div id="upload-error" class="hidden error-message">Please select a valid image file.</div>
+                        <img id="image-preview" class="hidden" src="" alt="Preview" />
+                        <button id="remove-image" class="hidden"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <div class="analysis-options hidden" id="analysis-options">
+                        <div class="options-grid">
+                            <div class="option-group" style="grid-column: 1 / -1;">
+                                <label for="image-description">Description</label>
+                                <input type="text" id="image-description" placeholder="e.g., A serene lake at sunrise">
+                            </div>
+                            <div class="option-group">
+                                <label for="ana-env">Environment</label>
+                                <select id="ana-env">
+                                    <option value="auto">Auto-Detect</option>
+                                    <option value="indoor">Indoor</option>
+                                    <option value="outdoor">Outdoor</option>
+                                    <option value="studio">Studio</option>
+                                    <option value="urban">Urban/City</option>
+                                    <option value="nature">Nature</option>
+                                </select>
+                            </div>
+                            <div class="option-group">
+                                <label for="ana-mood">Mood/Vibe</label>
+                                <select id="ana-mood">
+                                    <option value="auto">Auto-Detect</option>
+                                    <option value="happy">Happy/Bright</option>
+                                    <option value="moody">Moody/Dark</option>
+                                    <option value="professional">Professional</option>
+                                    <option value="artistic">Artistic/Creative</option>
+                                    <option value="candid">Candid/Casual</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="controls">
+                        <button id="analyze-btn" class="primary-btn" disabled>
+                            <i class="fa-solid fa-bolt"></i> Generate Prompt
+                        </button>
+                    </div>
+                    <div class="result-box hidden" id="analyzer-result">
+                        <div class="result-header">
+                            <span>Generated Prompt</span>
+                            <button class="copy-btn" data-target="analyzer-output"><i class="fa-regular fa-copy"></i>
+                                Copy</button>
+                        </div>
+                        <textarea id="analyzer-output" readonly
+                            placeholder="Your prompt will appear here..."></textarea>
+                    </div>
+                </div>
+            </section>
+            <!-- Random Prompt Generator Section -->
+            <section id="generator">
+                <div class="hero-text">
+                    <h1>Infinite Inspiration</h1>
+                    <p>Generate unique, high-quality prompts for human photo editing and creation.</p>
+                </div>
+                <div class="generator-container">
+                    <div class="options-grid">
+                        <div class="option-group">
+                            <label>Subject</label>
+                            <select id="opt-subject">
+                                <option value="random">Random</option>
+                                <option value="portrait">Portrait</option>
+                                <option value="full-body">Full Body</option>
+                                <option value="candid">Candid Street</option>
+                                <option value="studio">Studio Fashion</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label>Lighting</label>
+                            <select id="opt-lighting">
+                                <option value="random">Random</option>
+                                <option value="golden">Golden Hour</option>
+                                <option value="studio">Studio Softbox</option>
+                                <option value="neon">Neon Cyberpunk</option>
+                                <option value="natural">Natural Window</option>
+                                <option value="dramatic">Dramatic Rim</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label>Style</label>
+                            <select id="opt-style">
+                                <option value="random">Random</option>
+                                <option value="photorealistic">Photorealistic</option>
+                                <option value="cinematic">Cinematic</option>
+                                <option value="analog">Analog Film</option>
+                                <option value="editorial">Editorial</option>
+                                <option value="fantasy">Fantasy</option>
+                                <option value="minimalist">Minimalist</option>
+                                <option value="vintage">Vintage</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label>Camera</label>
+                            <select id="opt-camera">
+                                <option value="random">Random</option>
+                                <option value="dslr">DSLR Sharp</option>
+                                <option value="film">35mm Film</option>
+                                <option value="wide">Wide Angle</option>
+                                <option value="telephoto">Telephoto Portrait</option>
+                                <option value="drone">Drone/Aerial</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label>Color Grading</label>
+                            <select id="opt-color">
+                                <option value="random">Random</option>
+                                <option value="warm">Warm Tones</option>
+                                <option value="cool">Cool/Blue</option>
+                                <option value="bw">Black & White</option>
+                                <option value="vibrant">Vibrant/Pop</option>
+                                <option value="muted">Muted/Desaturated</option>
+                                <option value="pastel">Pastel</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button id="generate-random-btn" class="primary-btn">
+                        <i class="fa-solid fa-shuffle"></i> Randomize
+                    </button>
+                    <div class="result-box" id="generator-result">
+                        <div class="result-header">
+                            <span>Generated Prompt</span>
+                            <button class="copy-btn" data-target="generator-output"><i class="fa-regular fa-copy"></i>
+                                Copy</button>
+                        </div>
+                        <textarea id="generator-output" readonly
+                            placeholder="Click randomize to generate a prompt..."></textarea>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2025 LuminaPrompt. Designed for Creators.</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
